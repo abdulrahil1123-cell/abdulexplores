@@ -33,7 +33,7 @@ function Car() {
     // emit smoke from rear wheels
     const back = new THREE.Vector3(0, 0.15, -1.3).applyEuler(g.rotation).add(g.position);
     for (let k = 0; k < 2; k++) {
-      const pf = puffs[next.current];
+      const pf = puffs[next.current]!;
       next.current = (next.current + 1) % SMOKE;
       const side = new THREE.Vector3(k ? 0.78 : -0.78, 0, 0).applyEuler(g.rotation);
       pf.p.copy(back).add(side);

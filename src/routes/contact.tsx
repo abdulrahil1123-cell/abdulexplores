@@ -4,7 +4,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { cars, rentalTotal, inr, PHONE, EMAIL, ADDRESS } from "@/lib/fleet";
 
 export const Route = createFileRoute("/contact")({
-  validateSearch: (s: Record<string, unknown>): { car?: string } => ({ car: typeof s["car"] === "string" ? s["car"] : undefined }),
+  validateSearch: (s: Record<string, unknown>): { car?: string | undefined } => ({ car: typeof s["car"] === "string" ? s["car"] : undefined }),
   head: () => ({
     meta: [
       { title: "Book a Car & Contact | AR Rentals Hyderabad" },

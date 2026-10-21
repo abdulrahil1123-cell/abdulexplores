@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, ClientOnly } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
+const DriftScene = lazy(() => import("@/components/DriftScene"));
 import hero from "@/assets/hero.jpg";
 import { SiteLayout } from "@/components/SiteLayout";
 import { CarCard } from "@/components/CarCard";
@@ -47,6 +49,20 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <section className="relative h-[420px] md:h-[520px] bg-foreground">
+        <ClientOnly fallback={null}>
+          <Suspense fallback={null}>
+            <DriftScene />
+          </Suspense>
+        </ClientOnly>
+        <div className="pointer-events-none absolute left-0 top-0 p-6 md:p-10 text-background">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Built for the thrill</p>
+          <h2 className="mt-2 text-2xl md:text-4xl font-extrabold">Feel the drive.</h2>
+        </div>
+      </section>
+
+
 
       <section className="mx-auto max-w-6xl px-5 py-20">
         <div className="flex items-end justify-between gap-4 mb-10">

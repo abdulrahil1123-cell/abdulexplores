@@ -6,7 +6,7 @@ import sedan2 from "@/assets/sedan2.jpg";
 export const RATES = { SUV: 2000, Sedan: 1000 } as const;
 export type CarType = keyof typeof RATES;
 
-export const PHONE = "+91 98765 43210";
+export const PHONE = "+91 91217 05635";
 export const EMAIL = "bookings@arrentals.in";
 export const ADDRESS = "Road No. 12, Banjara Hills, Hyderabad, Telangana 500034";
 

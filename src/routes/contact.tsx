@@ -36,7 +36,7 @@ function Contact() {
             <p><strong className="block">Email</strong>{EMAIL}</p>
             <p><strong className="block">Office</strong>{ADDRESS}</p>
             <p><strong className="block">Hours</strong>Open 7 days, 8:00 AM – 10:00 PM</p>
-            <p><strong className="block">Service areas</strong>Hitech City, Gachibowli, Banjara Hills, Jubilee Hills, Secunderabad, Kukatpally, RGIA Airport</p>
+            <p><strong className="block">Service areas</strong>Baradari, Secunderabad, Hitech City, Gachibowli, Banjara Hills, Jubilee Hills, Kukatpally, RGIA Airport</p>
           </div>
         </div>
         <div className="lg:col-span-3 rounded-xl border bg-card p-6 md:p-8 shadow-card">
@@ -57,7 +57,7 @@ function Contact() {
               </label>
               <label className="text-sm font-medium">Pickup date<input required type="date" className={field} /></label>
               <label className="text-sm font-medium">Number of days<input required type="number" min={1} value={days} onChange={(e) => setDays(Number(e.target.value) || 1)} className={field} /></label>
-              <label className="sm:col-span-2 text-sm font-medium">Pickup location<input placeholder="e.g. Gachibowli or RGIA Airport" className={field} /></label>
+              <label className="sm:col-span-2 text-sm font-medium">Pickup location<input placeholder="e.g. Baradari office, Secunderabad or RGIA Airport" className={field} /></label>
               <div className="sm:col-span-2 flex items-center justify-between rounded-md bg-secondary px-4 py-3">
                 <span className="text-sm">Estimated rent</span>
                 <span className="font-display text-2xl font-extrabold">{inr(rentalTotal(selected.type, days))}</span>

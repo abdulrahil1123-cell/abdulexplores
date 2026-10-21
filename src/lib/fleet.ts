@@ -8,7 +8,7 @@ export type CarType = keyof typeof RATES;
 
 export const PHONE = "+91 91217 05635";
 export const EMAIL = "bookings@arrentals.in";
-export const ADDRESS = "Road No. 12, Banjara Hills, Hyderabad, Telangana 500034";
+export const ADDRESS = "Baradari, Hyderabad, Telangana";
 
 export const cars: {
   name: string;

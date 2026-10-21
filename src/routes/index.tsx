@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import hero from "@/assets/hero.jpg";
 import { SiteLayout } from "@/components/SiteLayout";
 import { CarCard } from "@/components/CarCard";
+import { Road3DBackground } from "@/components/Road3DBackground";
 import { cars, RATES, inr } from "@/lib/fleet";
 
 export const Route = createFileRoute("/")({
@@ -32,6 +33,7 @@ const steps = [
 function Index() {
   return (
     <SiteLayout>
+      <Road3DBackground />
       <section className="relative isolate overflow-hidden text-primary-foreground">
         <img src={hero} alt="SUV driving in Hyderabad at sunset" width={1600} height={912} className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
@@ -64,7 +66,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-secondary">
+      <section className="bg-secondary/70 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-5 py-20 grid gap-8 md:grid-cols-4">
           {features.map(([t, d]) => (
             <div key={t}>
@@ -80,7 +82,7 @@ function Index() {
         <h2 className="text-3xl md:text-4xl font-extrabold mb-10">How it works</h2>
         <ol className="grid gap-6 md:grid-cols-3">
           {steps.map(([t, d], i) => (
-            <li key={t} className="rounded-xl border bg-card p-6">
+            <li key={t} className="rounded-xl border bg-card/85 backdrop-blur p-6">
               <span className="font-display text-5xl font-extrabold text-accent">0{i + 1}</span>
               <h3 className="mt-3 font-bold text-lg">{t}</h3>
               <p className="text-sm text-muted-foreground mt-1">{d}</p>

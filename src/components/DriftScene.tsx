@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Lightformer, useGLTF, ContactShadows } from "@react-three/drei";
+import { Environment, Lightformer, ContactShadows } from "@react-three/drei";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -9,8 +9,6 @@ const DRIFT = 0.65; // extra yaw (radians) = drift angle
 const SMOKE = 60;
 
 function Car() {
-  const { scene } = useGLTF("/models/suv.glb");
-  const car = useMemo(() => scene.clone(), [scene]);
   const group = useRef<THREE.Group>(null);
   const smoke = useRef<THREE.InstancedMesh>(null);
   const puffs = useMemo(
@@ -33,11 +31,11 @@ function Car() {
     g.rotation.z = 0.05;
 
     // emit smoke from rear wheels
-    const back = new THREE.Vector3(0, 0.15, -0.9).applyEuler(g.rotation).add(g.position);
+    const back = new THREE.Vector3(0, 0.15, -1.3).applyEuler(g.rotation).add(g.position);
     for (let k = 0; k < 2; k++) {
-      const pf = puffs[next.current];
+      const pf = puffs[next.current]!;
       next.current = (next.current + 1) % SMOKE;
-      const side = new THREE.Vector3(k ? 0.5 : -0.5, 0, 0).applyEuler(g.rotation);
+      const side = new THREE.Vector3(k ? 0.78 : -0.78, 0, 0).applyEuler(g.rotation);
       pf.p.copy(back).add(side);
       pf.age = 0;
       pf.life = 0.9 + Math.random() * 0.6;
@@ -57,13 +55,80 @@ function Car() {
   return (
     <>
       <group ref={group}>
-        <primitive object={car} scale={1.6} />
+        <Baleno />
       </group>
       <instancedMesh ref={smoke} args={[undefined, undefined, SMOKE]}>
         <sphereGeometry args={[0.5, 8, 8]} />
         <meshStandardMaterial color="#d9d4cc" transparent opacity={0.35} depthWrite={false} />
       </instancedMesh>
     </>
+  );
+}
+
+// Stylised Maruti Suzuki Baleno hatchback (forward = +z), built from shapes
+const BLUE = "#1f3f8f";
+function Wheel({ x, z }: { x: number; z: number }) {
+  return (
+    <group position={[x, 0.33, z]} rotation-z={Math.PI / 2}>
+      <mesh castShadow>
+        <cylinderGeometry args={[0.33, 0.33, 0.24, 20]} />
+        <meshStandardMaterial color="#151515" roughness={0.8} />
+      </mesh>
+      <mesh position-y={x > 0 ? 0.125 : -0.125}>
+        <cylinderGeometry args={[0.22, 0.22, 0.02, 12]} />
+        <meshStandardMaterial color="#c9ccd1" metalness={0.8} roughness={0.3} />
+      </mesh>
+    </group>
+  );
+}
+function Baleno() {
+  const cabin = useMemo(() => {
+    // side profile: long sloping windscreen, short hatch at rear
+    const sh = new THREE.Shape();
+    sh.moveTo(-1.55, 0);
+    sh.lineTo(1.0, 0);
+    sh.lineTo(0.15, 0.55);
+    sh.lineTo(-1.2, 0.55);
+    sh.lineTo(-1.6, 0.05);
+    const g = new THREE.ExtrudeGeometry(sh, { depth: 1.3, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 2 });
+    g.translate(0, 0, -0.65);
+    g.rotateY(-Math.PI / 2);
+    return g;
+  }, []);
+  return (
+    <group>
+      <mesh position={[0, 0.55, 0]} castShadow>
+        <boxGeometry args={[1.6, 0.48, 3.9]} />
+        <meshStandardMaterial color={BLUE} metalness={0.6} roughness={0.3} />
+      </mesh>
+      <mesh position={[0, 0.85, 0.35]} geometry={cabin} castShadow>
+        <meshStandardMaterial color="#1a2433" metalness={0.9} roughness={0.1} />
+      </mesh>
+      <mesh position={[0, 1.42, -0.55]}>
+        <boxGeometry args={[1.38, 0.06, 1.3]} />
+        <meshStandardMaterial color={BLUE} metalness={0.6} roughness={0.3} />
+      </mesh>
+      {[-0.55, 0.55].map((x) => (
+        <mesh key={x} position={[x, 0.66, 1.96]}>
+          <boxGeometry args={[0.4, 0.12, 0.04]} />
+          <meshStandardMaterial color="#fff6d8" emissive="#fff1c0" emissiveIntensity={1.5} />
+        </mesh>
+      ))}
+      {[-0.6, 0.6].map((x) => (
+        <mesh key={x} position={[x, 0.68, -1.96]}>
+          <boxGeometry args={[0.32, 0.14, 0.04]} />
+          <meshStandardMaterial color="#c01818" emissive="#ff2020" emissiveIntensity={1.2} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0.5, 1.96]}>
+        <boxGeometry args={[0.8, 0.14, 0.03]} />
+        <meshStandardMaterial color="#222" metalness={0.5} />
+      </mesh>
+      <Wheel x={0.78} z={1.25} />
+      <Wheel x={-0.78} z={1.25} />
+      <Wheel x={0.78} z={-1.2} />
+      <Wheel x={-0.78} z={-1.2} />
+    </group>
   );
 }
 
@@ -119,4 +184,3 @@ export default function DriftScene() {
   );
 }
 
-useGLTF.preload("/models/suv.glb");

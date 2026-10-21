@@ -26,7 +26,7 @@ const features = [
 const steps = [
   ["Choose your car", "Pick an SUV or sedan that fits your trip."],
   ["Share documents", "Driving licence, Aadhaar and a refundable deposit."],
-  ["Drive away", "Collect at our Banjara Hills hub or get it delivered."],
+  ["Drive away", "Collect at our Baradari office or get it delivered."],
 ];
 
 function Index() {

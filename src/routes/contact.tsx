@@ -4,7 +4,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { cars, rentalTotal, inr, PHONE, EMAIL, ADDRESS } from "@/lib/fleet";
 
 export const Route = createFileRoute("/contact")({
-  validateSearch: (s: Record<string, unknown>) => ({ car: typeof s.car === "string" ? s.car : undefined }),
+  validateSearch: (s: Record<string, unknown>): { car?: string } => ({ car: typeof s["car"] === "string" ? s["car"] : undefined }),
   head: () => ({
     meta: [
       { title: "Book a Car & Contact | AR Rentals Hyderabad" },
@@ -20,10 +20,10 @@ const field = "w-full rounded-md border bg-background px-3 py-2.5 text-sm outlin
 
 function Contact() {
   const { car: preset } = Route.useSearch();
-  const [car, setCar] = useState(preset ?? cars[0].name);
+  const [car, setCar] = useState<string>(preset ?? cars[0]!.name);
   const [days, setDays] = useState(1);
   const [sent, setSent] = useState(false);
-  const selected = cars.find((c) => c.name === car) ?? cars[0];
+  const selected = cars.find((c) => c.name === car) ?? cars[0]!;
 
   return (
     <SiteLayout>

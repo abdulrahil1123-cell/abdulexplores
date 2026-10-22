@@ -10,6 +10,12 @@ export const PHONE = "+91 91217 05635";
 export const EMAIL = "bookings@arrentals.in";
 export const ADDRESS = "Baradari, Hyderabad, Telangana";
 
+export const WHATSAPP_NUMBER = "919121705635"; // digits only, no leading +
+export const buildWhatsAppLink = (text: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+export const buildReviewWhatsAppMessage = (name: string, rating: number, car: string, message: string) =>
+  `New review for AR Rentals\nName: ${name}\nRating: ${rating}/5\nCar: ${car}\nReview: ${message}`;
+
 export const cars: {
   name: string;
   type: CarType;

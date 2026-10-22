@@ -151,27 +151,6 @@
 @utility shadow-card { box-shadow: var(--shadow-card); }
 @layer base { h1,h2,h3 { font-family: var(--font-display); letter-spacing: -0.02em; } body { font-family: var(--font-sans); } }
 
-/* 3D road background (home page) */
-.road3d { background: var(--background); }
-.road3d-sky { position:absolute; inset:0 0 55% 0; background: radial-gradient(ellipse at 50% 100%, color-mix(in oklab, var(--accent) 35%, transparent), transparent 70%); }
-.road3d-stage { position:absolute; inset:0; perspective: 420px; perspective-origin: 50% 40%; }
-.road3d-floor, .road3d-lane { position:absolute; left:-50%; width:200%; top:45%; height:160%; transform: rotateX(78deg); transform-origin: top center; }
-.road3d-floor {
-  background-image:
-    linear-gradient(color-mix(in oklab, var(--primary) 30%, transparent) 2px, transparent 2px),
-    linear-gradient(90deg, color-mix(in oklab, var(--primary) 30%, transparent) 2px, transparent 2px);
-  background-size: 80px 80px;
-  animation: road3d-move 1.2s linear infinite;
-}
-.road3d-lane {
-  left: calc(50% - 6px); width: 12px;
-  background: repeating-linear-gradient(to bottom, var(--accent) 0 60px, transparent 60px 140px);
-  animation: road3d-lane 0.8s linear infinite;
-}
-.road3d-fade { position:absolute; inset:0; background: linear-gradient(to bottom, transparent 30%, color-mix(in oklab, var(--background) 55%, transparent)); }
-@keyframes road3d-move { to { background-position: 0 80px, 0 0; } }
-@keyframes road3d-lane { to { background-position: 0 140px; } }
-@media (prefers-reduced-motion: reduce) { .road3d-floor, .road3d-lane { animation: none; } }
 
 html { color-scheme: dark; }
 a, button { transition: color .2s, background-color .2s, border-color .2s, transform .2s, box-shadow .2s, filter .2s; }

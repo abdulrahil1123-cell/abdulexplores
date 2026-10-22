@@ -68,7 +68,7 @@ const Stars = ({ value, className = "" }: { value: number; className?: string })
 );
 
 function Reviews() {
-  const reviews = Route.useLoaderData<Review[]>();
+  const reviews = Route.useLoaderData() as Review[];
   const router = useRouter();
 
   const [name, setName] = useState("");

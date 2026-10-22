@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import hero from "@/assets/hero.jpg";
 import { SiteLayout } from "@/components/SiteLayout";
 import { CarCard } from "@/components/CarCard";
-import { Road3DBackground } from "@/components/Road3DBackground";
 import { cars, RATES, inr } from "@/lib/fleet";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +32,6 @@ const steps = [
 function Index() {
   return (
     <SiteLayout>
-      <Road3DBackground />
       <section className="relative isolate overflow-hidden text-primary-foreground">
         <img src={hero} alt="SUV driving in Hyderabad at sunset" width={1600} height={912} className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />

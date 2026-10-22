@@ -45,7 +45,7 @@ function Index() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/fleet" className="rounded-md bg-accent px-6 py-3 font-bold text-accent-foreground">View our cars</Link>
-            <Link to="/contact" className="rounded-md border border-primary-foreground/40 px-6 py-3 font-semibold">Book a car</Link>
+            <Link to="/contact" className="rounded-md border border-primary-foreground/40 px-6 py-3 font-semibold hover:border-accent hover:text-accent">Book a car</Link>
           </div>
         </div>
       </section>

@@ -22,7 +22,7 @@ export function CarCard({ car }: { car: (typeof cars)[number] }) {
             <span className="text-2xl font-extrabold font-display">{inr(RATES[car.type])}</span>
             <span className="text-sm text-muted-foreground"> / day</span>
           </p>
-          <Link to="/contact" search={{ car: car.name }} className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+          <Link to="/contact" search={{ car: car.name }} className="rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
             Book now
           </Link>
         </div>

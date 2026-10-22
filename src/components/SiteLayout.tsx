@@ -19,7 +19,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </Link>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             {nav.map((n) => (
-              <Link key={n.to} to={n.to} className="text-muted-foreground hover:text-foreground" activeProps={{ className: "text-foreground" }} activeOptions={{ exact: true }}>
+              <Link key={n.to} to={n.to} className="text-muted-foreground hover:text-accent" activeProps={{ className: "text-foreground" }} activeOptions={{ exact: true }}>
                 {n.label}
               </Link>
             ))}
@@ -37,7 +37,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </nav>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="bg-primary text-primary-foreground">
+      <footer className="border-t bg-card text-card-foreground">
         <div className="mx-auto max-w-6xl px-5 py-12 grid gap-8 md:grid-cols-3 text-sm">
           <div>
             <p className="font-display text-xl font-extrabold">AR Rentals</p>

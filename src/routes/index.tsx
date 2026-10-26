@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -30,6 +31,25 @@ const steps = [
   ["Drive away", "Collect at our Baradari office or get it delivered."],
 ];
 
+function DriveLane({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [go, setGo] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setGo(true); io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className={`drive-lane grid gap-6 sm:grid-cols-2 lg:grid-cols-4 overflow-x-clip ${go ? "is-driving" : ""}`}>
+      {children}
+    </div>
+  );
+}
+
 function Index() {
   return (
     <SiteLayout>
@@ -60,9 +80,9 @@ function Index() {
           </div>
           <Link to="/fleet" className="text-sm font-semibold underline underline-offset-4">See all</Link>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <DriveLane>
           {cars.map((c) => <CarCard key={c.name} car={c} />)}
-        </div>
+        </DriveLane>
       </section>
 
       <section className="bg-secondary/70 backdrop-blur-sm">

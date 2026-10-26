@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import hero from "@/assets/hero.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { SiteLayout } from "@/components/SiteLayout";
 import { CarCard } from "@/components/CarCard";

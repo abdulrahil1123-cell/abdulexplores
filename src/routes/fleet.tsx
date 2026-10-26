@@ -25,7 +25,7 @@ function Fleet() {
           <section key={t} className="mt-14">
             <h2 className="text-2xl font-extrabold">{t}s <span className="text-accent">· {inr(RATES[t])}/day</span></h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              {cars.filter((c) => c.type === t).map((c) => <CarCard key={c.name} car={c} />)}
+              {cars.filter((c) => c.type === t).map((c) => <CarCard key={c.name} car={c} flip />)}
             </div>
           </section>
         ))}

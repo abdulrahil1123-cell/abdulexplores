@@ -43,24 +43,26 @@ function Front({ car }: { car: Car }) {
 
 function Back({ car }: { car: Car }) {
   return (
-    <div className="p-5 flex flex-col gap-3 flex-1">
+    <div className="p-5 flex flex-col flex-1">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-widest text-accent">{car.type}</span>
         <span className="text-xs text-muted-foreground">Details</span>
       </div>
-      <h3 className="text-xl font-bold">{car.name}</h3>
-      <p className="text-sm text-muted-foreground">
-        {car.seats} seats · {car.fuel} · {car.transmission} · AC
-      </p>
-      <ul className="text-sm flex flex-col gap-1.5 mt-1">
-        {included.map((i) => (
-          <li key={i} className="flex gap-2">
-            <span className="text-accent font-bold" aria-hidden>✓</span>
-            <span className="text-muted-foreground">{i}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-auto flex items-end justify-between pt-3 border-t">
+      <div className="flex-1 flex flex-col justify-center gap-3 py-4">
+        <h3 className="text-xl font-bold">{car.name}</h3>
+        <p className="text-sm text-muted-foreground">
+          {car.seats} seats · {car.fuel} · {car.transmission} · AC
+        </p>
+        <ul className="text-sm flex flex-col gap-1.5 mt-1">
+          {included.map((i) => (
+            <li key={i} className="flex gap-2">
+              <span className="text-accent font-bold" aria-hidden>✓</span>
+              <span className="text-muted-foreground">{i}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex items-end justify-between pt-3 border-t">
         <p>
           <span className="text-2xl font-extrabold font-display">{inr(RATES[car.type])}</span>
           <span className="text-sm text-muted-foreground"> / day</span>

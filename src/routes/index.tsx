@@ -81,7 +81,7 @@ function Index() {
           <Link to="/fleet" className="text-sm font-semibold underline underline-offset-4">See all</Link>
         </div>
         <DriveLane>
-          {cars.map((c) => <CarCard key={c.name} car={c} />)}
+          {cars.map((c) => <CarCard key={c.name} car={c} flip />)}
         </DriveLane>
       </section>
 

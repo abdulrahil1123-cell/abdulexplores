@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import hero from "@/assets/hero.jpg";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { SiteLayout } from "@/components/SiteLayout";
 import { CarCard } from "@/components/CarCard";
 import { cars, RATES, inr } from "@/lib/fleet";
@@ -33,7 +33,7 @@ function Index() {
   return (
     <SiteLayout>
       <section className="relative isolate overflow-hidden text-primary-foreground">
-        <img src={hero} alt="SUV driving in Hyderabad at sunset" width={1600} height={912} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <video src={heroVideo.url} autoPlay muted loop playsInline aria-hidden className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
         <div className="mx-auto max-w-6xl px-5 py-28 md:py-40">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent">Hyderabad · Self-drive</p>

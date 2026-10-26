@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import hero from "@/assets/hero.jpg";
 import heroVideo from "@/assets/hero-video.mp4.asset.json";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -31,7 +31,7 @@ const steps = [
   ["Drive away", "Collect at our Baradari office or get it delivered."],
 ];
 
-function DriveLane({ children }: { children: React.ReactNode }) {
+function DriveLane({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [go, setGo] = useState(false);
   useEffect(() => {

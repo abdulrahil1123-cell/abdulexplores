@@ -157,3 +157,20 @@ a, button { transition: color .2s, background-color .2s, border-color .2s, trans
 a.bg-accent:hover, button.bg-accent:hover, a.bg-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--accent) 60%, transparent); }
 article.shadow-card { transition: transform .25s, border-color .25s; }
 article.shadow-card:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--accent) 50%, var(--border)); }
+
+/* Cars "drive in" one after another: accelerate in, brake with a slight nose-dip, settle */
+.drive-lane > * { opacity: 0; transform: translateX(-120vw); }
+.drive-lane.is-driving > * { animation: drive-in 1.4s cubic-bezier(.22,.9,.3,1) forwards; }
+.drive-lane.is-driving > *:nth-child(2) { animation-delay: .45s; }
+.drive-lane.is-driving > *:nth-child(3) { animation-delay: .9s; }
+.drive-lane.is-driving > *:nth-child(4) { animation-delay: 1.35s; }
+@keyframes drive-in {
+  0% { opacity: 0; transform: translateX(-120vw) skewX(-6deg); }
+  15% { opacity: 1; }
+  78% { transform: translateX(14px) skewX(2deg) rotate(.6deg); }
+  90% { transform: translateX(-4px) skewX(0) rotate(-.2deg); }
+  100% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .drive-lane > *, .drive-lane.is-driving > * { opacity: 1; transform: none; animation: none; }
+}

@@ -174,3 +174,18 @@ article.shadow-card:hover { transform: translateY(-4px); border-color: color-mix
 @media (prefers-reduced-motion: reduce) {
   .drive-lane > *, .drive-lane.is-driving > * { opacity: 1; transform: none; animation: none; }
 }
+
+/* Car cards flip over on hover (or tap) to show what's included */
+.car-flip { perspective: 1400px; cursor: pointer; outline-offset: 4px; }
+.car-flip__inner { position: relative; height: 100%; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.75,.25,1); }
+.car-flip:hover .car-flip__inner,
+.car-flip:focus-visible .car-flip__inner,
+.car-flip[data-open="true"] .car-flip__inner { transform: rotateY(180deg); }
+.car-flip__face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.car-flip__front { position: relative; }
+.car-flip__back { position: absolute; inset: 0; transform: rotateY(180deg); }
+.flip-hint { position: absolute; right: .75rem; bottom: .75rem; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-foreground); background: color-mix(in oklab, var(--card) 80%, transparent); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .car-flip__inner { transition: none; }
+}
+

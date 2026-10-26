@@ -38,7 +38,7 @@ function DriveLane({ children }: { children: ReactNode }) {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setGo(true); io.disconnect(); }
+      if (e?.isIntersecting) { setGo(true); io.disconnect(); }
     }, { threshold: 0.2 });
     io.observe(el);
     return () => io.disconnect();

@@ -14,7 +14,7 @@ export const WHATSAPP_NUMBER = "919121705635"; // digits only, no leading +
 export const buildWhatsAppLink = (text: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 export const buildReviewWhatsAppMessage = (name: string, rating: number, car: string, message: string) =>
-  `New review for AR Rentals\nName: ${name}\nRating: ${rating}/5\nCar: ${car}\nReview: ${message}`;
+  `New Website Review / Query\n\nName: ${name}\nRating: ${rating}/5\nCar: ${car}\nMessage: ${message}`;
 
 export const cars: {
   name: string;

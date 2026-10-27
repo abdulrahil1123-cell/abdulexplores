@@ -78,8 +78,11 @@ function Reviews() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sentName, setSentName] = useState<string | null>(null);
+  const [lastWaUrl, setLastWaUrl] = useState<string | null>(null);
 
-  const submit = async (e: React.FormEvent) => {
+  // Open WhatsApp synchronously inside the click handler: browsers block
+  // window.open calls that happen after an await, so we open first, save after.
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     const cleanName = name.trim();
@@ -93,21 +96,24 @@ function Reviews() {
       return;
     }
     setSubmitting(true);
-    const { error: insertError } = await supabase
-      .from("reviews")
-      .insert({ name: cleanName, rating, car, message: cleanMessage });
-    setSubmitting(false);
-    if (insertError) {
-      setError("Something went wrong while saving your review. Please try again.");
-      return;
-    }
-    router.invalidate();
-    setSentName(cleanName);
-    window.open(
-      buildWhatsAppLink(buildReviewWhatsAppMessage(cleanName, rating, car, cleanMessage)),
-      "_blank",
-      "noopener,noreferrer",
-    );
+    const waUrl = buildWhatsAppLink(buildReviewWhatsAppMessage(cleanName, rating, car, cleanMessage));
+    setLastWaUrl(waUrl);
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+
+    void (async () => {
+      const { error: insertError } = await supabase
+        .from("reviews")
+        .insert({ name: cleanName, rating, car, message: cleanMessage });
+      setSubmitting(false);
+      if (insertError) {
+        setError(
+          "Your review was sent to our WhatsApp, but we could not save it on the site. Please try submitting again.",
+        );
+        return;
+      }
+      router.invalidate();
+      setSentName(cleanName);
+    })();
   };
 
   const avg = reviews.length
@@ -160,7 +166,7 @@ function Reviews() {
                   Your review is saved. A WhatsApp chat with your review is ready to send — press send and it reaches us instantly.
                 </p>
                 <a
-                  href={buildWhatsAppLink(buildReviewWhatsAppMessage(sentName, rating, car, message.trim()))}
+                  href={lastWaUrl ?? buildWhatsAppLink(buildReviewWhatsAppMessage(sentName, rating, car, message.trim()))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground hover:brightness-110"

@@ -166,7 +166,7 @@ function Reviews() {
                   Your review is saved. A WhatsApp chat with your review is ready to send — press send and it reaches us instantly.
                 </p>
                 <a
-                  href={buildWhatsAppLink(buildReviewWhatsAppMessage(sentName, rating, car, message.trim()))}
+                  href={lastWaUrl ?? buildWhatsAppLink(buildReviewWhatsAppMessage(sentName, rating, car, message.trim()))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground hover:brightness-110"

@@ -161,9 +161,9 @@ function Reviews() {
           <div className="lg:col-span-2">
             {sentName ? (
               <div className="rounded-xl border bg-card p-8 shadow-card">
-                <h2 className="text-2xl font-extrabold">Thanks, {sentName}!</h2>
+                <h2 className="text-2xl font-extrabold">Thank you, {sentName}!</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Your review is saved. A WhatsApp chat with your review is ready to send — press send and it reaches us instantly.
+                  Your review/query is ready to send on WhatsApp — just press Send in the chat that opened.
                 </p>
                 <a
                   href={lastWaUrl ?? buildWhatsAppLink(buildReviewWhatsAppMessage(sentName, rating, car, message.trim()))}

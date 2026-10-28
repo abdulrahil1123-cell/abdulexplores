@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { PHONE, EMAIL, ADDRESS } from "@/lib/fleet";
 import { InstallAppButton } from "@/components/InstallAppButton";
+import { DonChat } from "@/components/DonChat";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -62,6 +63,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </div>
         <p className="text-center text-xs opacity-60 pb-6">© {new Date().getFullYear()} AR Rentals, Hyderabad</p>
       </footer>
+      <DonChat />
     </div>
   );
 }

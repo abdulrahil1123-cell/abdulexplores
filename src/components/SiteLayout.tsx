@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { PHONE, EMAIL, ADDRESS } from "@/lib/fleet";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -25,9 +26,12 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
-            Call {PHONE}
-          </a>
+          <div className="flex items-center gap-2">
+            <InstallAppButton />
+            <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="hidden sm:inline-block rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
+              Call {PHONE}
+            </a>
+          </div>
         </div>
         <nav className="md:hidden flex gap-4 overflow-x-auto px-5 pb-3 text-sm">
           {nav.map((n) => (

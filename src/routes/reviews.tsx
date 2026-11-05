@@ -41,7 +41,15 @@ export const listReviews = createServerFn({ method: "GET" }).handler(async (): P
 });
 
 export const Route = createFileRoute("/reviews")({
-  loader: () => listReviews(),
+  // Never blank the page if reviews fail to load; the form still works.
+  loader: async () => {
+    try {
+      return await listReviews();
+    } catch (e) {
+      console.error("Could not load reviews", e);
+      return [] as Review[];
+    }
+  },
   head: () => ({
     meta: [
       { title: "Customer Reviews | AR Rentals Hyderabad" },

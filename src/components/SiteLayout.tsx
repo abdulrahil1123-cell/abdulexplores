@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { PHONE, EMAIL, ADDRESS } from "@/lib/fleet";
 import { InstallAppButton } from "@/components/InstallAppButton";
 import { DonChat } from "@/components/DonChat";
+import { HelpCenter } from "@/components/HelpCenter";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -29,6 +30,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </nav>
           <div className="flex items-center gap-2">
             <InstallAppButton />
+            <HelpCenter />
             <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="hidden sm:inline-block rounded-md bg-accent px-4 py-2 text-sm font-bold text-accent-foreground">
               Call {PHONE}
             </a>
